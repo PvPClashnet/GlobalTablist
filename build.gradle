@@ -30,7 +30,16 @@ allprojects {
 dependencies {
     compileOnly group: 'com.imaginarycode.minecraft', name: 'RedisBungee', version: '0.3.8-SNAPSHOT'
     compileOnly group: 'net.cubespace', name: 'Yamler-Bungee', version: '2.4.0-SNAPSHOT'
+
     compile project(":api")
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir project(':api').file('src/main/java')
+        }
+    }
 }
 
 processResources {

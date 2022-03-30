@@ -8,6 +8,7 @@ import net.md_5.bungee.tab.TabList;
 import java.lang.reflect.Field;
 
 public class ReflectionUtil {
+
     public static void setTablistHandler(ProxiedPlayer player, TabList tablistHandler) throws NoSuchFieldException, IllegalAccessException {
         setField(UserConnection.class, player, "tabListHandler", tablistHandler, 5);
     }

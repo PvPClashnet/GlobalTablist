@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
  * Ping placeholder.
  */
 public final class PingPlaceholder extends Placeholder {
+
     public PingPlaceholder() {
         super("{ping}");
     }

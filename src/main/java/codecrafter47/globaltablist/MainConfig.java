@@ -22,7 +22,9 @@ import net.cubespace.Yamler.Config.Comments;
 import net.cubespace.Yamler.Config.Config;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MainConfig extends Config {
 
@@ -44,6 +46,11 @@ public class MainConfig extends Config {
                 " - {redis_online} if using RedisBungee the amount of players online on your network",
                 " - {redis_online_<server>} amount of players on a specific server if using RedisBungee"
         };
+
+        if(prefixs.isEmpty()) {
+            prefixs.put("globaltablist.customprefix.dev", "&a&lDEV ");
+            prefixs.put("globaltablist.customprefix.owner", "&c&lOWNER ");
+        }
     }
 
     @Comments({
@@ -93,4 +100,12 @@ public class MainConfig extends Config {
             "You can add some custom text slots at the top of the player list"
     })
     public List<String> custom_lines_top = Arrays.asList("&6Welcome", "&6{player}", "&6to our server", "", "", "");
+
+    @Comments({
+            "Custom player prefixes.",
+            "Set the prefixes you want just by adding the",
+            "permission: the prefix"
+    })
+    public Map<String, String> prefixs = new HashMap<>();
 }
+

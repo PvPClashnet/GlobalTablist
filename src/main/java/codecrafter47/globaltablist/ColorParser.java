@@ -99,12 +99,14 @@ public class ColorParser {
         boolean escaped = false;
         for (int i = start - 1; i < s.length(); i++) {
             char ch = s.charAt(i);
+            if(i < start) {
+                continue;
+            }
+
             if (escaped) {
                 escaped = false;
             } else if (ch == ChatColor.COLOR_CHAR) {
                 escaped = true;
-            } else if (i < start) {
-
             } else {
                 return i;
             }

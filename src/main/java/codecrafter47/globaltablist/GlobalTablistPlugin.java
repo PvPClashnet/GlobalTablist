@@ -30,7 +30,6 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 
 import java.io.File;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.logging.Level;
@@ -50,7 +49,7 @@ public class GlobalTablistPlugin extends Plugin implements GlobalTablistAPI {
     private CustomizationHandler customizationHandler;
 
     @Getter
-    private Set<Placeholder> placeholders = new CopyOnWriteArraySet<>();
+    private final Set<Placeholder> placeholders = new CopyOnWriteArraySet<>();
 
     /**
      * provides access to the configuration
@@ -87,9 +86,9 @@ public class GlobalTablistPlugin extends Plugin implements GlobalTablistAPI {
             config.init(new File(getDataFolder(), "config.yml"));
             config.save();
         } catch (InvalidConfigurationException ex) {
-            getLogger().warning("Unable to load Config");
-            getLogger().log(Level.WARNING, null, ex);
-            getLogger().info("Disabling Plugin");
+            this.getLogger().warning("Unable to load Config");
+            this.getLogger().log(Level.WARNING, null, ex);
+            this.getLogger().info("Disabling Plugin");
             return;
         }
 
@@ -105,16 +104,8 @@ public class GlobalTablistPlugin extends Plugin implements GlobalTablistAPI {
         // register listener
         ProxyServer.getInstance().getPluginManager().registerListener(this, listener);
 
-        // Start metrics
-        try {
-            Metrics metrics = new Metrics(this);
-            metrics.start();
-        } catch (Throwable th) {
-            getLogger().log(Level.WARNING, "Failed to initialize Metrics", th);
-        }
-
         // Add reload command
-        getProxy().getPluginManager().registerCommand(this, new GlobalTablistCommand(this));
+        this.getProxy().getPluginManager().registerCommand(this, new GlobalTablistCommand(this));
     }
 
     private void registerPlaceholders() {
@@ -129,9 +120,9 @@ public class GlobalTablistPlugin extends Plugin implements GlobalTablistAPI {
         }
         registerPlaceholder(this, new ServerPlaceholder(this));
 
-        if (getProxy().getPluginManager().getPlugin("RedisBungee") != null) {
+        if (this.getProxy().getPluginManager().getPlugin("RedisBungee") != null) {
             registerPlaceholder(this, new RedisOnlineCountPlaceholder(this));
-            for (String server : getProxy().getServers().keySet()) {
+            for (String server : this.getProxy().getServers().keySet()) {
                 registerPlaceholder(this, new RedisServerOnlineCountPlaceholder(this, server));
             }
         }

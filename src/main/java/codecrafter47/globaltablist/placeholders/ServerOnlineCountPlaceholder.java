@@ -10,8 +10,9 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 
 public final class ServerOnlineCountPlaceholder extends Placeholder {
+
     private final Plugin plugin;
-    private String serverName;
+    private final String serverName;
 
     private ScheduledTask updateTask = null;
     private int onlineCount = 0;

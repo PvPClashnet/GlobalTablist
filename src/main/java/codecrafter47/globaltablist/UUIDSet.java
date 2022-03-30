@@ -7,6 +7,7 @@ import gnu.trove.map.hash.TObjectIntHashMap;
 import java.util.UUID;
 
 public class UUIDSet {
+
     private final TObjectIntMap<UUID> map = new TObjectIntHashMap<>(Constants.DEFAULT_CAPACITY, Constants.DEFAULT_LOAD_FACTOR, 0);
 
     public void add(UUID uuid) {

@@ -14,7 +14,7 @@ import java.util.regex.Matcher;
 
 public class RedisServerOnlineCountPlaceholder extends Placeholder {
     private final Plugin plugin;
-    private String serverName;
+    private final String serverName;
 
     private ScheduledTask updateTask = null;
     private int onlineCount = 0;

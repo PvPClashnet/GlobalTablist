@@ -1,6 +1,5 @@
 package codecrafter47.globaltablist.placeholders.redis;
 
-import codecrafter47.globaltablist.placeholders.OnlineCountPlaceholder;
 import com.imaginarycode.minecraft.redisbungee.RedisBungee;
 import com.imaginarycode.minecraft.redisbungee.RedisBungeeAPI;
 import de.codecrafter47.globaltablist.Placeholder;

@@ -35,6 +35,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Florian Stober
  */
 public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
+
     private final Collection<UUID> uuids = new HashSet<>();
     private final UUIDSet globalUUIDs = new UUIDSet();
     private static final Map<UUID, String> displayNames = new ConcurrentHashMap<>();
@@ -72,7 +73,7 @@ public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
                 }
             }
             if (!itemList.isEmpty()) {
-                playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[itemList.size()]));
+                playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[0]));
                 this.player.unsafe().sendPacket(playerListItem);
             }
             return;
@@ -103,7 +104,7 @@ public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
                     }
                 }
                 if (!itemList.isEmpty()) {
-                    playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[itemList.size()]));
+                    playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[0]));
                     this.player.unsafe().sendPacket(playerListItem);
                 }
             }
@@ -141,11 +142,11 @@ public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
             if (!gamemodeList.isEmpty()) {
                 PlayerListItem pli = new PlayerListItem();
                 pli.setAction(PlayerListItem.Action.UPDATE_GAMEMODE);
-                pli.setItems(gamemodeList.toArray(new PlayerListItem.Item[gamemodeList.size()]));
+                pli.setItems(gamemodeList.toArray(new PlayerListItem.Item[0]));
                 this.player.unsafe().sendPacket(pli);
             }
 
-            playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[itemList.size()]));
+            playerListItem.setItems(itemList.toArray(new PlayerListItem.Item[0]));
         }
 
         if (playerListItem.getItems().length > 0) this.player.unsafe().sendPacket(playerListItem);
@@ -171,12 +172,12 @@ public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
 
         PlayerListItem packet = new PlayerListItem();
         packet.setAction(PlayerListItem.Action.REMOVE_PLAYER);
-        packet.setItems(removeList.toArray(new PlayerListItem.Item[removeList.size()]));
+        packet.setItems(removeList.toArray(new PlayerListItem.Item[0]));
         if (packet.getItems().length > 0) this.player.unsafe().sendPacket(packet);
 
         packet = new PlayerListItem();
         packet.setAction(PlayerListItem.Action.UPDATE_GAMEMODE);
-        packet.setItems(gamemodeList.toArray(new PlayerListItem.Item[gamemodeList.size()]));
+        packet.setItems(gamemodeList.toArray(new PlayerListItem.Item[0]));
         if (packet.getItems().length > 0) this.player.unsafe().sendPacket(packet);
 
         this.uuids.clear();
@@ -268,8 +269,19 @@ public class GlobalTablistHandler18 extends GlobalTablistHandlerBase {
         pli.setAction(PlayerListItem.Action.UPDATE_DISPLAY_NAME);
         PlayerListItem.Item item = new PlayerListItem.Item();
         item.setUuid(player.getUniqueId());
-        item.setDisplayName(name);
+
+        item.setDisplayName(this.getPrefixPermissions(player) + name);
         pli.setItems(new PlayerListItem.Item[]{item});
         this.player.unsafe().sendPacket(pli);
+    }
+
+    public String getPrefixPermissions(ProxiedPlayer player) {
+        for(String permission : this.plugin.getConfig().prefixs.keySet()) {
+            if(player.hasPermission(permission)) {
+                return Utils.Color(this.plugin.getConfig().prefixs.get(permission));
+            }
+        }
+
+        return "";
     }
 }

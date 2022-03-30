@@ -12,6 +12,7 @@ import java.util.regex.Matcher;
  * Online count placeholder.
  */
 public final class OnlineCountPlaceholder extends Placeholder {
+
     private final Plugin plugin;
 
     private ScheduledTask updateTask = null;

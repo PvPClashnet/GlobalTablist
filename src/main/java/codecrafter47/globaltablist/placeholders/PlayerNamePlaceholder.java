@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
  * Placeholder for the players display name.
  */
 public final class PlayerNamePlaceholder extends Placeholder {
+
     public PlayerNamePlaceholder() {
         super("{player}");
     }

@@ -40,8 +40,9 @@ import java.util.regex.Matcher;
  * @author Florian Stober
  */
 public class CustomizationHandler implements Listener {
+
     private final GlobalTablistPlugin plugin;
-    private List<CustomizationElement> customText = new CopyOnWriteArrayList<>();
+    private final List<CustomizationElement> customText = new CopyOnWriteArrayList<>();
 
     final static String[] fakePlayers = {"§m§4§7§k§o§l§0§r", "§m§4§7§k§o§l§1§r", "§m§4§7§k§o§l§2§r", "§m§4§7§k§o§l§3§r", "§m§4§7§k§o§l§4§r", "§m§4§7§k§o§l§5§r", "§m§4§7§k§o§l§6§r", "§m§4§7§k§o§l§7§r", "§m§4§7§k§o§l§8§r", "§m§4§7§k§o§l§9§r", "§m§4§7§k§o§l§a§r", "§m§4§7§k§o§l§b§r", "§m§4§7§k§o§l§c§r", "§m§4§7§k§o§l§d§r", "§m§4§7§k§o§l§e§r", "§m§4§7§k§o§l§f§r"};
 
@@ -86,7 +87,7 @@ public class CustomizationHandler implements Listener {
     }
 
     private static String[] splitText(String s) {
-        String ret[] = new String[2];
+        String[] ret = new String[2];
         int left = s.length();
         if (left <= 16) {
             ret[0] = s;
@@ -195,10 +196,10 @@ public class CustomizationHandler implements Listener {
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     e.printStackTrace();
                 }
-                if (tablistHandler != null && tablistHandler instanceof GlobalTablistHandler17) {
+                if (tablistHandler instanceof GlobalTablistHandler17) {
                     String text = replacePlaceholders(this.text, player);
                     text = ChatColor.translateAlternateColorCodes('&', text);
-                    String split[] = splitText(text);
+                    String[] split = splitText(text);
                     Team t = new Team();
                     t.setName("GTAB#" + id);
                     t.setMode(!((GlobalTablistHandler17) tablistHandler).createdCustomSlots.contains(id) ? (byte) 0 : (byte) 2);

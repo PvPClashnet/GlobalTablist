@@ -6,6 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.protocol.packet.PlayerListItem;
 
 public class GlobalTablistHandler17 extends GlobalTablistHandlerBase {
+
     TIntSet createdCustomSlots = new TIntHashSet(0);
 
     public GlobalTablistHandler17(ProxiedPlayer player, GlobalTablistPlugin plugin) {
@@ -64,7 +65,18 @@ public class GlobalTablistHandler17 extends GlobalTablistHandlerBase {
         if (text.length() > 16) {
             text = text.substring(0, 16);
         }
-        item.setDisplayName(text);
+
+        item.setDisplayName(this.getPrefixPermissions(player) + text);
         return item;
+    }
+
+    public String getPrefixPermissions(ProxiedPlayer player) {
+        for(String permission : this.plugin.getConfig().prefixs.keySet()) {
+            if(player.hasPermission(permission)) {
+                return Utils.Color(this.plugin.getConfig().prefixs.get(permission));
+            }
+        }
+
+        return "";
     }
 }

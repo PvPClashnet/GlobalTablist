@@ -5,9 +5,9 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class PlayerLimitPlaceholder extends Placeholder {
+
     public PlayerLimitPlaceholder() {
         super("{max}");
     }

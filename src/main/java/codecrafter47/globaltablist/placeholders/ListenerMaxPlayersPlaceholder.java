@@ -6,6 +6,7 @@ import net.md_5.bungee.api.connection.ProxiedPlayer;
 import java.util.regex.Matcher;
 
 public final class ListenerMaxPlayersPlaceholder extends Placeholder {
+
     public ListenerMaxPlayersPlaceholder() {
         super("{shown_max}");
     }

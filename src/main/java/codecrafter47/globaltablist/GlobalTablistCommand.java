@@ -16,15 +16,16 @@ public class GlobalTablistCommand extends Command {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        if (args.length == 1 && "reload".equalsIgnoreCase(args[0])) {
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
             if (plugin.reload()) {
                 sender.sendMessage(new ComponentBuilder("GlobalTablist has ben reloaded.").color(ChatColor.GREEN).create());
-            } else {
-                sender.sendMessage(new ComponentBuilder("GlobalTablist failed to load config.yml.").color(ChatColor.RED).create());
+                return;
             }
-        } else {
-            sender.sendMessage(new ComponentBuilder("GlobalTablist v" + plugin.getDescription().getVersion()).color(ChatColor.YELLOW).create());
-            sender.sendMessage(new ComponentBuilder("Usage: /globaltablist reload").color(ChatColor.YELLOW).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/globaltablist reload")).create());
+            sender.sendMessage(new ComponentBuilder("GlobalTablist failed to load config.yml.").color(ChatColor.RED).create());
+            return;
         }
+
+        sender.sendMessage(new ComponentBuilder("GlobalTablist v" + plugin.getDescription().getVersion()).color(ChatColor.YELLOW).create());
+        sender.sendMessage(new ComponentBuilder("Usage: /globaltablist reload").color(ChatColor.YELLOW).event(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/globaltablist reload")).create());
     }
 }

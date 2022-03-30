@@ -9,6 +9,7 @@ import java.util.regex.Matcher;
  * New line placeholder. Replaces '{newline}' with the new line character ('\n'). For people who can't use yaml.
  */
 public final class NewLinePlaceholder extends Placeholder {
+
     public NewLinePlaceholder() {
         super("{newline}");
     }

@@ -92,7 +92,7 @@ public abstract class GlobalTablistHandlerBase extends TabList {
         ((UserConnection)player).setPing(i);
         plugin.getPingPlaceholder().onPingChange(player);
         if (plugin.getConfig().updatePing) {
-            if (lastPing - i > 50 || lastPing - i < 50) {
+            if (lastPing - i != 50) {
                 for (final GlobalTablistHandlerBase tablistHandler : tablistHandlers) {
                     tablistHandler.executeInEventLoop(new Runnable() {
                         @Override
